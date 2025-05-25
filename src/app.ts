@@ -12,6 +12,7 @@ import userRoutes from './routes/user.routes';
 import notificationRoutes from './routes/notification.routes';
 import quizRoutes from './routes/quiz.routes';
 import quizResultRoutes from './routes/quiz-result.routes';
+import { NotificationScheduler } from './services/NotificationScheduler';
 
 dotenv.config();
 
@@ -53,6 +54,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/quiz-results', quizResultRoutes);
+
+// Initialize notification scheduler
+const notificationScheduler = new NotificationScheduler();
+notificationScheduler.start();
 
 // Error handling
 app.use(errorHandler);

@@ -52,6 +52,10 @@ export class UserController {
         email,
         notification_token,
         notification_enabled,
+        device_type,
+        device_version,
+        device_model,
+        device_name,
       } = req.body;
 
       // Check if email already exists
@@ -70,8 +74,9 @@ export class UserController {
       // Insert user
       const result = await pool.query(
         `INSERT INTO users 
-        (first_name, last_name, email, notification_token, notification_enabled) 
-        VALUES ($1, $2, $3, $4, $5) 
+        (first_name, last_name, email, notification_token, notification_enabled, 
+         device_type, device_version, device_model, device_name) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
         RETURNING *`,
         [
           first_name,
@@ -79,6 +84,10 @@ export class UserController {
           email,
           notification_token,
           notification_enabled,
+          device_type,
+          device_version,
+          device_model,
+          device_name,
         ],
       );
 
@@ -110,6 +119,10 @@ export class UserController {
         email,
         notification_token,
         notification_enabled,
+        device_type,
+        device_version,
+        device_model,
+        device_name,
       } = req.body;
 
       // Check if user exists
@@ -143,8 +156,12 @@ export class UserController {
             last_name = COALESCE($2, last_name),
             email = COALESCE($3, email),
             notification_token = COALESCE($4, notification_token),
-            notification_enabled = COALESCE($5, notification_enabled)
-        WHERE id = $6 
+            notification_enabled = COALESCE($5, notification_enabled),
+            device_type = COALESCE($6, device_type),
+            device_version = COALESCE($7, device_version),
+            device_model = COALESCE($8, device_model),
+            device_name = COALESCE($9, device_name)
+        WHERE id = $10 
         RETURNING *`,
         [
           first_name,
@@ -152,6 +169,10 @@ export class UserController {
           email,
           notification_token,
           notification_enabled,
+          device_type,
+          device_version,
+          device_model,
+          device_name,
           id,
         ],
       );
