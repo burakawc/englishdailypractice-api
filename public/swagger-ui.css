@@ -1,0 +1,4 @@
+/* Hide the SVG definitions */
+svg[style*="position:absolute;width:0;height:0"] {
+  display: none !important;
+}

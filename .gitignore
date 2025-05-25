@@ -1,0 +1,10 @@
+# compiled output
+/dist
+/node_modules
+/build
+
+
+/.idea
+.env
+yarn.lock
+package-lock.json
