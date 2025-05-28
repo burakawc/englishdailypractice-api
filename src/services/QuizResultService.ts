@@ -99,8 +99,13 @@ export class QuizResultService {
     nextMidnight.setDate(nextMidnight.getDate() + 1);
     nextMidnight.setHours(0, 0, 0, 0);
 
+    // Türkiye saati için UTC+3 offset'i uygula
     const now = new Date();
-    let diff = nextMidnight.getTime() - now.getTime();
+    const turkeyOffset = 3 * 60 * 60 * 1000; // UTC+3 için milisaniye cinsinden offset
+    const turkeyNow = new Date(now.getTime() + turkeyOffset);
+    const turkeyNextMidnight = new Date(nextMidnight.getTime() + turkeyOffset);
+
+    let diff = turkeyNextMidnight.getTime() - turkeyNow.getTime();
 
     if (diff < 0) {
       // Zaman geçtiyse hemen başlayabilir
